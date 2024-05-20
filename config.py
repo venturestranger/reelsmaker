@@ -7,7 +7,7 @@ class Config:
 	# FONT_PATH = './bebas.ttf'
 	FONT_PATH = 'Arial'
 	FONT_SIZE = 50
-	CHARACTER_LIMIT = 30
-	SUBS_SHIFT = 0.025
+	CHARACTER_LIMIT = 25
+	SUBS_SHIFT = 0.02
 	TRANSLATE = '[^qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMйцукенгшщзхъфывапролдджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДДЖЭЯЧСМИТЬБЮЁ\,\.\?\:\-\ ]'
 	PUNCT = ',.?:-'
