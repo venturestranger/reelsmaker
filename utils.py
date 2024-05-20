@@ -50,8 +50,12 @@ def generate_subtitles(text: str, duration: float) -> list:
 
 
 # generate an audio file from a piece of text
-def generate_audio(name: str, text: str) -> str:
-	os.system(f'./phonify.sh "{name}" "{text}"')
+def generate_audio(name: str, text: str, lang: str = 'Русский') -> str:
+	if lang == 'Русский':
+		os.system(f'./phonify_ru.sh "{name}" "{text}"')
+	else:
+		os.system(f'./phonify_en.sh "{name}" "{text}"')
+
 	return name
 
 

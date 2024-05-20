@@ -12,6 +12,11 @@ import os
 media = []
 text = []
 audio = []
+lang = st.radio(
+	'Choose reels language / выберите язык для reels',
+	['Русский', 'English'],
+	index=0
+)
 
 
 # removes all previously generated audio
@@ -20,11 +25,11 @@ audio = []
 
 # implements video and audio dropdown menu
 for i in range(st.session_state.get('piece_count', 1)):
-	media.append(st.file_uploader('Drop your media', type=['mp4', 'wmv', 'mov', 'png', 'jpg', 'jpeg', 'heic', 'avi'], key=f'media_{i}'))
-	text.append(st.text_area('Input text', key=f'text_{i}'))
+	media.append(st.file_uploader('Drop your media / предоставьте ваше медиа', type=['mp4', 'wmv', 'mov', 'png', 'jpg', 'jpeg', 'heic', 'avi'], key=f'media_{i}'))
+	text.append(st.text_area('Input text / введите текст', key=f'text_{i}'))
 
 	if text[-1] != None and len(text[-1].strip()) != 0 and not os.path.exists(Config.OUTPUT_PATH + str(hash(text[-1]))[1:] + '.wav'):
-		name = generate_audio(str(hash(text[-1]))[1:], preprocess_text(text[-1]))
+		name = generate_audio(str(hash(text[-1]))[1:], preprocess_text(text[-1]), lang)
 		audio.append(Config.OUTPUT_PATH + f'{name}.wav')
 		st.audio(Config.OUTPUT_PATH + f'{name}.wav')
 	elif os.path.exists(Config.OUTPUT_PATH + str(hash(text[-1]))[1:] + '.wav'):
@@ -46,9 +51,9 @@ elif len(media) > 1 and media[-2] == None:
 
 
 # triggers clip generation
-if st.button('Создать клип'):
+if st.button('Generate a clip / создать клип'):
 	if any([i == None for i in media[:-1]]) or any([i == None for i in audio[:-1]]) or len(media) == 1:
-		st.error('Заполните все поля')
+		st.error('Fill in all fields / Заполните все поля')
 	else:
 		generate_video(media[:-1], audio[:-1], text[:-1])
 		for file_type in Config.VIDEO:
@@ -60,6 +65,8 @@ if st.button('Создать клип'):
 
 try:
 	st.video(Config.OUTPUT_PATH + Config.OUTPUT_FILE)
+	with open(Config.OUTPUT_PATH + Config.OUTPUT_FILE, 'rb') as f:
+		st.download_button('Download / загрузить', f.read(), file_name='generated_video.mp4')
 	remove_files('')
 except:
 	pass
