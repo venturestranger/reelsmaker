@@ -107,7 +107,7 @@ def generate_video(media, audio, text):
 				text_clip = text_clip.set_start(subtitle['start'])
 				if subs[(i + 1) % len(subs)]['start'] != 0:
 					text_clip = text_clip.set_end(subs[(i + 1) % len(subs)]['start'])
-				text_clip = text_clip.set_position(((Config.AREA[1] - text_clip.w) / 2, (Config.AREA[0] - text_clip.h) * 5/6))
+				text_clip = text_clip.set_position(((Config.AREA[1] - text_clip.w) / 2, (Config.AREA[0] - text_clip.h) * 7/8))
 				subtitles.append(text_clip)
 
 			video_clip.audio = audio_clip
