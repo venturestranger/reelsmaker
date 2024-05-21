@@ -6,6 +6,9 @@ This program provides an interface for automatic reels generation in multiple la
 To install the required libraries, run:
 ```bash
 $> pip install -r requirements.txt
+$> git clone https://github.com/rhasspy/piper
+$> cd piper
+$> make
 ```
 
 ## Run
