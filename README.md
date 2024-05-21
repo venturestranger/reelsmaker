@@ -79,3 +79,11 @@ $> streamlit run main.py
 
 4. **Загрузить клип:**
     - После создания клипа нажмите кнопку `Загрузить`, чтобы сохранить его.
+
+## Examples / Примеры
+
+https://github.com/venturestranger/reelsmaker/assets/67862257/5aa645a6-a4f3-4567-8a1d-c3cfb6fe4c66
+
+
+
+
