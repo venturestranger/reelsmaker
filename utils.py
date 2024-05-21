@@ -16,7 +16,7 @@ def preprocess_text(text: str) -> str:
 def split_by_punct(text: str) -> list:
 	for character in Config.PUNCT:
 		text = text.replace(character, '@#$')
-	return text.split('@#$')
+	return list(filter(lambda x: len(x) != 0, text.split('@#$')))
 
 
 # generate a random name
@@ -39,7 +39,7 @@ def generate_subtitles(text: str, duration: float) -> list:
 				buffer += words[i] + ' '
 			else:
 				subtitles.append({'text': buffer.strip(), 'start': prv_len})
-				prv_len += duration * len(buffer) / len(text) - Config.SUBS_SHIFT * len(buffer.split())
+				prv_len += duration * len(buffer) / len(text) - Config.SUBS_SHIFT * len(buffer)
 				buffer = words[i] + ' '
 
 		if buffer != '':

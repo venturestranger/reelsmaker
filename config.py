@@ -8,6 +8,6 @@ class Config:
 	FONT_PATH = 'Arial'
 	FONT_SIZE = 50
 	CHARACTER_LIMIT = 25
-	SUBS_SHIFT = 0.02
+	SUBS_SHIFT = 0.006
 	TRANSLATE = '[^qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMйцукенгшщзхъфывапролдджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДДЖЭЯЧСМИТЬБЮЁ\,\.\?\:\-\ ]'
 	PUNCT = ',.?:-'
