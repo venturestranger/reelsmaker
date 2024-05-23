@@ -33,7 +33,7 @@ lang = st.radio(
 # implements video and audio dropdown menu
 for i in range(st.session_state.get('piece_count', 1)):
 	media.append(st.file_uploader('Drop your media / предоставьте ваше медиа', type=['mp4', 'wmv', 'mov', 'png', 'jpg', 'jpeg', 'heic', 'avi'], key=f'media_{i}'))
-	text.append(st.text_area('Input text / введите текст', key=f'text_{i}'))
+	text.append(st.text_area('Input text / введите текст', key=f'text_{i}').strip())
 
 	if text[-1] != None and len(text[-1].strip()) != 0 and not os.path.exists(Config.OUTPUT_PATH + str(hash(text[-1]))[1:] + '.wav'):
 		name = generate_audio(str(hash(text[-1]))[1:], preprocess_text(text[-1]), lang, st.session_state['ru_synth_driver'])
@@ -43,7 +43,6 @@ for i in range(st.session_state.get('piece_count', 1)):
 		name = str(hash(text[-1]))[1:]
 		audio.append(Config.OUTPUT_PATH + f'{name}.wav')
 		st.audio(Config.OUTPUT_PATH + f'{name}.wav')
-		audio.append(Config.OUTPUT_PATH + f'{name}.wav')
 	else:
 		audio.append(None)
 
@@ -74,6 +73,5 @@ try:
 	st.video(Config.OUTPUT_PATH + Config.OUTPUT_FILE)
 	with open(Config.OUTPUT_PATH + Config.OUTPUT_FILE, 'rb') as f:
 		st.download_button('Download / загрузить', f.read(), file_name='generated_video.mp4')
-	remove_files('')
 except:
 	pass
