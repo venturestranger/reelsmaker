@@ -7,7 +7,7 @@ class Config:
 	FONT_PATH = 'Arial'
 	FONT_SIZE = 50
 	CHARACTER_LIMIT = 25
-	SUBS_SHIFT = 0.0005
+	SUBS_SHIFT = 0.002
 	TRANSLATE = '[^qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMйцукенгшщзхъфывапролдджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДДЖЭЯЧСМИТЬБЮЁ\,\.\?\:\-\ ]'
 	PUNCT = ',.?:-'
 	SYNTH_PORT = 5678
