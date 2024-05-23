@@ -8,6 +8,13 @@ from config import Config
 import os
 
 
+# initialization of supplemental drivers for speech synthesis
+if st.session_state.get('initialized', False) == False:
+	from synth_ru import synth
+	st.session_state['ru_synth_driver'] = synth
+	st.session_state['initialized'] = True
+
+
 # media and text fields
 media = []
 text = []
@@ -29,7 +36,7 @@ for i in range(st.session_state.get('piece_count', 1)):
 	text.append(st.text_area('Input text / введите текст', key=f'text_{i}'))
 
 	if text[-1] != None and len(text[-1].strip()) != 0 and not os.path.exists(Config.OUTPUT_PATH + str(hash(text[-1]))[1:] + '.wav'):
-		name = generate_audio(str(hash(text[-1]))[1:], preprocess_text(text[-1]), lang)
+		name = generate_audio(str(hash(text[-1]))[1:], preprocess_text(text[-1]), lang, st.session_state['ru_synth_driver'])
 		audio.append(Config.OUTPUT_PATH + f'{name}.wav')
 		st.audio(Config.OUTPUT_PATH + f'{name}.wav')
 	elif os.path.exists(Config.OUTPUT_PATH + str(hash(text[-1]))[1:] + '.wav'):
