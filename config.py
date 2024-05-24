@@ -10,4 +10,3 @@ class Config:
 	SUBS_SHIFT = 0.003
 	TRANSLATE = '[^qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMйцукенгшщзхъфывапролдджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДДЖЭЯЧСМИТЬБЮЁ\,\.\?\:\-\ ]'
 	PUNCT = ',.?:-'
-	SYNTH_PORT = 5678
