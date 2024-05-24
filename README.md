@@ -5,6 +5,7 @@ This program provides an interface for automatic reels generation in multiple la
 ## Installation
 To install the required libraries, run:
 ```bash
+$> <your package manager> install imagemagick
 $> pip install -r requirements.txt
 $> git clone https://github.com/rhasspy/piper
 $> cd piper
