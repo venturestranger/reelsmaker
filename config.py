@@ -1,6 +1,9 @@
 class Config:
 	OUTPUT_PATH = './storage/'
 	OUTPUT_FILE = 'ret.mp4'
+	LOGO_PATH = './resources/kstnws_logo.png'
+	LOGO_WIDTH = 200
+	LOGO_POSITION = [500, 20]
 	IMAGE = ['png', 'jpg', 'jpeg', 'heic']
 	VIDEO = ['mp4', 'mov', 'wmv', 'avi']
 	AREA = [1280, 720]

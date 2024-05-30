@@ -26,7 +26,7 @@ def get_random_name() -> str:
 
 
 # generate subtitles from a given text and audio duration
-def generate_subtitles(text: str, duration: float) -> list:
+def generate_subtitles(text: str, duration: float, shift: float) -> list:
 	subtitles = []
 	prv_len = 0
 
@@ -39,12 +39,12 @@ def generate_subtitles(text: str, duration: float) -> list:
 				buffer += words[i] + ' '
 			else:
 				subtitles.append({'text': buffer.strip(), 'start': prv_len})
-				prv_len += duration * len(buffer) / len(text) - Config.SUBS_SHIFT * len(buffer)
+				prv_len += duration * len(buffer) / len(text) - shift * len(buffer)
 				buffer = words[i] + ' '
 
 		if buffer != '':
 			subtitles.append({'text': buffer.strip(), 'start': prv_len})
-			prv_len += duration * len(buffer) / len(text) - Config.SUBS_SHIFT * len(buffer.split())
+			prv_len += duration * len(buffer) / len(text) - shift * len(buffer.split())
 	
 	return subtitles
 
@@ -75,7 +75,7 @@ def remove_files(file_type: str = '.wav'):
 
 
 # generate a video file from the collected media (video, imgs, audio)
-def generate_video(media, audio, text):
+def generate_video(media: list, audio: list, text: list, shift: float):
 	video_clips = []
 
 	for i in range(len(media)):
@@ -100,7 +100,7 @@ def generate_video(media, audio, text):
 			video_clip = crop(video_clip, height=Config.AREA[0], width=Config.AREA[1], x_center=video_clip.size[0] // 2, y_center=video_clip.size[1] // 2)
 
 			subtitles = []
-			subs = generate_subtitles(preprocess_text(text[i]), audio_clip.duration)
+			subs = generate_subtitles(preprocess_text(text[i]), audio_clip.duration, shift)
 			for i in range(len(subs)):
 				subtitle = subs[i]
 
@@ -116,5 +116,8 @@ def generate_video(media, audio, text):
 			video_clips.append(video_clip)
 
 	final_clip = concatenate_videoclips(video_clips)
+	logo_clip = ImageClip(Config.LOGO_PATH).resize(width=Config.LOGO_WIDTH)
+
+	final_clip = CompositeVideoClip([final_clip, logo_clip.set_position(Config.LOGO_POSITION)]).set_duration(final_clip.duration)
 	file_name = f'{Config.OUTPUT_PATH}{Config.OUTPUT_FILE}'
 	final_clip.write_videofile(file_name, fps=30, codec='libx264', audio_codec='aac')

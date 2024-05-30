@@ -24,6 +24,9 @@ lang = st.radio(
 	['Русский', 'English'],
 	index=0
 )
+subs_shift = st.number_input('Subtitles boost / ускорение субтитров', placeholder=Config.SUBS_SHIFT, value=None, format='%.3f', step=0.001)
+if subs_shift == None:
+	subs_shift = Config.SUBS_SHIFT
 
 
 # removes all previously generated audio
@@ -61,7 +64,7 @@ if st.button('Generate a clip / создать клип'):
 	if any([i == None for i in media[:-1]]) or any([i == None for i in audio[:-1]]) or len(media) == 1:
 		st.error('Fill in all fields / Заполните все поля')
 	else:
-		generate_video(media[:-1], audio[:-1], text[:-1])
+		generate_video(media[:-1], audio[:-1], text[:-1], subs_shift)
 		for file_type in Config.VIDEO:
 			if file_type != 'mp4':
 				remove_files(file_type)
